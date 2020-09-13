@@ -1040,6 +1040,10 @@ char **av;
 	Panic(0, "No $SCREENDIR with multi screens, please.");
 #endif
     }
+  else
+    {
+	  SockDir = "/tmp/.gdb-screendir";
+	}
 #ifdef MULTIUSER
   if (multiattach)
     {
