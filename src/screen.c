@@ -1068,7 +1068,7 @@ char **av;
 	      debug1("SockDir '%s' missing ...\n", SockDir);
 	      if (UserContext() > 0)
 		{
-		  if (mkdir(SockDir, 0700))
+		  if (mkdir(SockDir, 0700) == -1 && errno != EEXIST)
 		    UserReturn(0);
 		  UserReturn(1);
 		}
@@ -1091,7 +1091,7 @@ char **av;
 #else
 		  0777;
 #endif
-	      if (mkdir(SockDir, n) == -1)
+	      if (mkdir(SockDir, n) == -1 && errno != EEXIST)
 		Panic(errno, "Cannot make directory '%s'", SockDir);
 	    }
 	  else
