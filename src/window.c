@@ -1274,11 +1274,15 @@ char **args, *ttyn;
 	  close(0);
 	  dup(slave);
 	  close(slave);
-	  closeallfiles(win->w_ptyfd);
+	  if (!getenv("SCREEN_DONT_CLOSE_FILES"))
+		closeallfiles(win->w_ptyfd);
 	  slave = dup(0);
 	}
       else
-        closeallfiles(win->w_ptyfd);
+	{
+		if (!getenv("SCREEN_DONT_CLOSE_FILES"))
+			closeallfiles(win->w_ptyfd);
+	}
 #ifdef DEBUG
       if (dfp)	/* do not produce child debug, when debug is "off" */
 	{

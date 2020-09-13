@@ -406,7 +406,8 @@ char **av;
    *  First, close all unused descriptors
    *  (otherwise, we might have problems with the select() call)
    */
-  closeallfiles(0);
+  if (!getenv("SCREEN_DONT_CLOSE_FILES"))
+	closeallfiles(0);
 #ifdef DEBUG
   opendebug(1, 0);
 #endif
